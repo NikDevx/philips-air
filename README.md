@@ -22,7 +22,7 @@ Sends `values` object to the purifier.
 ### getStatus()
 Returns an object representing the current status of the purifier.
 
-### getStatus()
+### getWifi()
 Returns an object representing the wifi settings of the purifier.
 
 ### getFirmware()
