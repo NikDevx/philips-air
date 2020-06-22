@@ -10,11 +10,8 @@ To use the API, install the `philips-air` package from npm, and `require` it wit
 | Plain CoAP | _Coming Soon_                     |
 | CoAP       | _Coming Soon_                     |
 
-### constructor(host, key = null, timeout = 5000)
+### constructor(host, timeout = 5000, key = null)
 Instantiates the class. `host` is the IP address or hostname of the purifier, `key` is the session key (will automatically request a new one if null), `timeout` is the timeout in milliseconds for all requests.
-
-### getKey()
-Requests a new session key. Will also return the session key.
 
 ### setValues(values)
 Sends `values` object to the purifier.
@@ -23,7 +20,7 @@ Sends `values` object to the purifier.
 Returns an object representing the current status of the purifier.
 
 ### getWifi()
-Returns an object representing the wifi settings of the purifier.
+Returns an object representing the wifi settings of the purifier. Only supported with HTTP protocol.
 
 ### getFirmware()
 Returns an object representing information on the firmware of the purifier.

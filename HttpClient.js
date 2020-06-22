@@ -35,25 +35,24 @@ encrypt = function(data, key) {
 
 class HttpClient {
 
-    constructor(host, key = null, timeout = 5000) {
+    constructor(host, timeout = 5000, key = null) {
         this.host = host;
         if (key == null) {
-            this.getKey();
+            this.#getKey();
         } else {
             this.key = key;
         }
-        this.timeout = timeout;
+        this.config = {};
+        this.config.timeout = timeout;
     }
 
-    getKey = function() {
+    #getKey = function() {
         var a = crypto.createDiffieHellman(P, 'hex', G, 'hex');
         a.generateKeys();
         var data = {
             'diffie': a.getPublicKey('hex')
         };
-        var dh = deasync(axios.put('http://' + this.host + '/di/v1/products/0/security', data, {
-            timeout: this.timeout
-        })).data;
+        var dh = deasync(axios.put('http://' + this.host + '/di/v1/products/0/security', data, this.config)).data;
         var s = a.computeSecret(dh['hellman'], 'hex', 'hex');
         var s_bytes = Buffer.from(s, 'hex').slice(0, 16);
         this.key = aesDecrypt(dh['key'], s_bytes).slice(0, 16);
@@ -63,45 +62,39 @@ class HttpClient {
     setValues = function(values) {
         var encrypted = encrypt(JSON.stringify(values), this.key);
 
-        deasync(axios.put('http://' + this.host + '/di/v1/products/1/air', encrypted, {
-            timeout: this.timeout
-        }));
+        deasync(axios.put('http://' + this.host + '/di/v1/products/1/air', encrypted, this.config));
     }
 
     #getOnce = function(endpoint) {
-        var resp = deasync(axios.get('http://' + this.host + endpoint, {
-            timeout: this.timeout
-        })).data;
+        var resp = deasync(axios.get('http://' + this.host + endpoint, this.config)).data;
         return decrypt(resp, this.key);
     }
 
     #getData = function(endpoint) {
+        var data = '';
         try {
-            return this.#getOnce(endpoint);
+            data = this.#getOnce(endpoint);
         } catch (err) {
-            this.getKey();
-            return this.#getOnce(endpoint);
+            this.#getKey();
+            data = this.#getOnce(endpoint);
         }
+        return JSON.parse(data);
     }
 
     getStatus = function() {
-        var status = this.#getData('/di/v1/products/1/air');
-        return JSON.parse(status);
+        return this.#getData('/di/v1/products/1/air');
     }
 
     getWifi = function() {
-        var wifi = this.#getData('/di/v1/products/0/wifi');
-        return JSON.parse(wifi);
+        return this.#getData('/di/v1/products/0/wifi');
     }
 
     getFirmware = function() {
-        var firmware = this.#getData('/di/v1/products/0/firmware');
-        return JSON.parse(firmware);
+        return this.#getData('/di/v1/products/0/firmware');
     }
 
     getFilters = function() {
-        var filters = this.#getData('/di/v1/products/1/fltsts');
-        return JSON.parse(filters);
+        return this.#getData('/di/v1/products/1/fltsts');
     }
 
 }
