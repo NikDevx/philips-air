@@ -22,7 +22,7 @@ aesDecrypt = function(data, key) {
 decrypt = function(data, key) {
     var payload = Buffer.from(data, 'base64');
     var decrypt = bytesToString(aesDecrypt(payload, key).slice(2));
-    return decrypt.substring(0, decrypt.lastIndexOf('}') + 1);
+    return pkcs7.unpad(decrypt);
 }
 
 encrypt = function(data, key) {
@@ -62,7 +62,7 @@ class HttpClient {
 
     setValues = function(values) {
         var encrypted = encrypt(JSON.stringify(values), this.key);
-        
+
         deasync(axios.put('http://' + this.host + '/di/v1/products/1/air', encrypted, {
             timeout: this.timeout
         }));
