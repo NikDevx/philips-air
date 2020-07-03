@@ -85,16 +85,16 @@ class HttpClient {
         return this.#getData('/di/v1/products/1/air');
     }
 
-    getWifi = function() {
-        return this.#getData('/di/v1/products/0/wifi');
-    }
-
     getFirmware = function() {
         return this.#getData('/di/v1/products/0/firmware');
     }
 
     getFilters = function() {
         return this.#getData('/di/v1/products/1/fltsts');
+    }
+
+    getWifi = function() {
+        return this.#getData('/di/v1/products/0/wifi');
     }
 
 }
