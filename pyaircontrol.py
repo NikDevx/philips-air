@@ -117,7 +117,6 @@ def main():
         if args.protocol == "http":
             c.get_status()
         values = json.loads(input())
-        print(values)
         c.set_values(values)
 
 if __name__ == "__main__":

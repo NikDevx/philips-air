@@ -1,6 +1,6 @@
 {
   "name": "philips-air",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "NodeJS library for controlling Philips Air Purifiers",
   "repository": {
     "type": "git",
