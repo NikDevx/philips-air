@@ -1,4 +1,6 @@
 # philips-air
+[![npm](https://img.shields.io/npm/v/philips-air) ![npm](https://img.shields.io/npm/dt/philips-air)](https://www.npmjs.com/package/philips-air)
+
 NodeJS library for controlling Philips Air Purifiers, based on work done by [py-air-control](https://github.com/rgerganov/py-air-control).
 
 ## Prerequisites
