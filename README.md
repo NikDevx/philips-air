@@ -3,12 +3,19 @@
 
 NodeJS library for controlling Philips Air Purifiers, based on work done by [py-air-control](https://github.com/rgerganov/py-air-control).
 
-## Prerequisites
-If you wish to use either of the CoAP protocols, you'll need to have py-air-control installed.
+## Manual Post Install Steps
+The postinstall script should handle this automatically. However, if something goes wrong, or you don't want to use `--unsafe-perm` during install, you can follow these steps manually.
 
+If you are using CoAP or Plain CoAP:
 1. Install pip and git using `sudo apt install python3-pip git`.
 2. Install py-air-control using `sudo pip3 install py-air-control`.
 3. Update CoAPthon3 using `sudo pip3 install -U git+https://github.com/Tanganelli/CoAPthon3@89d5173`.
+
+Plain CoAP users only will also need to do:
+1. Allow non-root to send pings using `echo "net.ipv4.ping_group_range=0 1000" | sudo tee -a /etc/sysctl.conf`.
+2. Update running sysctl configuration using `sudo sysctl -p`.
+
+If you're only using HTTP, you can skip all of the post install steps.
 
 ## Usage
 To use the API, install the `philips-air` package from npm, and `require` it with the correct protocol type for your device:
