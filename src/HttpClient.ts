@@ -13,7 +13,7 @@ function bytesToString(array: Uint8Array): string {
   return decode;
 }
 
-function aesDecrypt(data: string, key: Uint8Array): Uint8Array {
+function aesDecrypt(data: any, key: Uint8Array): Uint8Array {
   const iv = Buffer.from('00000000000000000000000000000000', 'hex');
   const crypto = new aesjs.ModeOfOperation.cbc(key, iv);
   return crypto.decrypt(Buffer.from(data, 'hex'));
@@ -21,7 +21,7 @@ function aesDecrypt(data: string, key: Uint8Array): Uint8Array {
 
 function decrypt(data: string, key: Uint8Array): string {
   const payload = Buffer.from(data, 'base64');
-  const decrypt = bytesToString(aesDecrypt(payload.toString(), key).slice(2));
+  const decrypt = bytesToString(aesDecrypt(payload, key).slice(2));
   return pkcs7.unpad(decrypt);
 }
 
