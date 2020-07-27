@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "allowJs": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "removeComments": true,
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}
