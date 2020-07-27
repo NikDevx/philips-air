@@ -41,7 +41,8 @@
     "typescript": "^3.9.7"
   },
   "files": [
-    "config.schema.json",
+    "postinstall.js",
+    "pyaircontrol.py",
     "dist/**/*",
     "LICENSE",
     "package.json",
