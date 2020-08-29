@@ -4,9 +4,7 @@
 
 NodeJS library for controlling Philips Air Purifiers, based on work done by [py-air-control](https://github.com/rgerganov/py-air-control).
 
-## Manual Post Install Steps
-
-The postinstall script should handle this automatically. However, if something goes wrong, or you don't want to use `--unsafe-perm` during install, you can follow these steps manually.
+## Post Install Steps
 
 If you are using CoAP or Plain CoAP:
 

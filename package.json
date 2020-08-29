@@ -1,6 +1,6 @@
 {
   "name": "philips-air",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "NodeJS library for controlling Philips Air Purifiers",
   "main": "dist/index.js",
   "repository": {
@@ -43,7 +43,6 @@
     "lint-check": "eslint src/*.ts",
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint-check",
-    "postinstall": "node postinstall.js",
     "postpublish": "npm run clean",
     "watch": "npm run clean && tsc --watch"
   },
