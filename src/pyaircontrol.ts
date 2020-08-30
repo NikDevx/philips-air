@@ -14,44 +14,67 @@ export default class pyaircontrol {
     this.path = pathjs.resolve(__dirname, '..');
   }
 
-  setValues(values: any): void { // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
-    const setOptions = {
+  private execPromise(args: Array<string>, input?: string): Promise<string> {
+    const options: process.ExecFileSyncOptionsWithStringEncoding = {
       cwd: this.path,
       timeout: this.timeout,
-      input: JSON.stringify(values)
+      encoding: 'utf8'
     };
-    process.execFileSync('python3', [this.path + '/pyaircontrol.py', '--ipaddr', this.host, '--protocol', this.protocol, '--set'], setOptions);
-  }
-
-  private getData(type: string): any {
-    const options = {
-      cwd: this.path,
-      timeout: this.timeout
-    };
-    let output = process.execFileSync('python3', [this.path + '/pyaircontrol.py', '--ipaddr', this.host, '--protocol', this.protocol, type], options).toString();
-    const start = output.indexOf('{');
-    const end = output.indexOf('}', start);
-    if (start >= 0 && end > 0) {
-      output = output.substr(start, end - start + 1);
-      return JSON.parse(output);
-    } else {
-      return null;
+    if (input) {
+      options.input = input;
     }
+    return new Promise<string>((resolve, reject) => {
+      try {
+        resolve(process.execFileSync('python3', args, options));
+      } catch (err) {
+        reject(err);
+      }
+    });
   }
 
-  getStatus(): any {
+  setValues(values: any): Promise<void> { // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
+    return this.execPromise(
+      [this.path + '/pyaircontrol.py',
+        '--ipaddr', this.host,
+        '--protocol', this.protocol,
+        '--set'],
+      JSON.stringify(values))
+      .then(() => {
+        return;
+      });
+  }
+
+  private getData(type: string): Promise<any> {
+    return this.execPromise(
+      [this.path + '/pyaircontrol.py',
+        '--ipaddr', this.host,
+        '--protocol', this.protocol,
+        type])
+      .then((output) => {
+        const start = output.indexOf('{');
+        const end = output.indexOf('}', start);
+        if (start >= 0 && end > 0) {
+          const json = output.substr(start, end - start + 1);
+          return JSON.parse(json);
+        } else {
+          return undefined;
+        }
+      });
+  }
+
+  getStatus(): Promise<any> {
     return this.getData('--status');
   }
 
-  getFirmware(): any {
+  getFirmware(): Promise<any> {
     return this.getData('--firmware');
   }
 
-  getFilters(): any {
+  getFilters(): Promise<any> {
     return this.getData('--filters');
   }
 
-  getWifi(): any {
+  getWifi(): Promise<any> {
     return this.getData('--wifi');
   }
 }

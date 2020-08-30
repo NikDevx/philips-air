@@ -1,7 +1,7 @@
 export interface AirClient {
-  setValues(values: any): void;
-  getStatus(): any;
-  getFirmware(): any;
-  getFilters(): any;
-  getWifi(): any;
+  setValues(values: any): Promise<void>;
+  getStatus(): Promise<any>;
+  getFirmware(): Promise<any>;
+  getFilters(): Promise<any>;
+  getWifi(): Promise<any>;
 }

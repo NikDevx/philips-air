@@ -8,23 +8,23 @@ export class HttpClientLegacy implements AirClient {
     this.client = new pyaircontrol('http', host, timeout);
   }
 
-  setValues(values: any): void { // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
-    this.client.setValues(values);
+  setValues(values: any): Promise<void> { // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
+    return this.client.setValues(values);
   }
 
-  getStatus(): any {
+  getStatus(): Promise<any> {
     return this.client.getStatus();
   }
 
-  getFirmware(): any {
+  getFirmware(): Promise<any> {
     return this.client.getFirmware();
   }
 
-  getFilters(): any {
+  getFilters(): Promise<any> {
     return this.client.getFilters();
   }
 
-  getWifi(): any {
+  getWifi(): Promise<any> {
     return this.client.getWifi();
   }
 }

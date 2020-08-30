@@ -8,23 +8,25 @@ export class PlainCoapClient implements AirClient {
     this.client = new pyaircontrol('plain_coap', host, timeout);
   }
 
-  setValues(values: any): void { // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
-    this.client.setValues(values);
+  setValues(values: any): Promise<void> { // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
+    return this.client.setValues(values);
   }
 
-  getStatus(): any {
+  getStatus(): Promise<any> {
     return this.client.getStatus();
   }
 
-  getFirmware(): any {
+  getFirmware(): Promise<any> {
     return this.getStatus();
   }
 
-  getFilters(): any {
+  getFilters(): Promise<any> {
     return this.getStatus();
   }
 
-  getWifi(): any {
-    return null;
+  getWifi(): Promise<any> {
+    return new Promise<any>((resolve) => {
+      resolve(undefined);
+    });
   }
 }
