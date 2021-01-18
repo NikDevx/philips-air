@@ -50,7 +50,7 @@
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^3.7.0",
     "@types/aes-js": "3.1.1",
-    "@types/node": "14.14.20",
+    "@types/node": "14.14.21",
     "@types/node-fetch": "2.5.8",
     "@types/pkcs7-padding": "0.1.0",
     "eslint": "^7.5.0",
