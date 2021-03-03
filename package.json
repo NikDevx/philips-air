@@ -54,7 +54,7 @@
     "@types/node-fetch": "2.5.8",
     "@types/pkcs7-padding": "0.1.0",
     "eslint": "^7.5.0",
-    "markdownlint-cli": "^0.26.0",
+    "markdownlint-cli": "^0.27.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.0.2"
   },
