@@ -52,7 +52,7 @@
     "@types/node-fetch": "3.0.3",
     "@types/pkcs7-padding": "0.1.1",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
-    "@typescript-eslint/parser": "^3.7.0",
+    "@typescript-eslint/parser": "^5.30.7",
     "eslint": "^7.5.0",
     "markdownlint-cli": "^0.29.0",
     "rimraf": "^3.0.2",
