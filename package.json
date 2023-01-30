@@ -68,7 +68,7 @@
   ],
   "dependencies": {
     "aes-js": ">=3.1.2",
-    "axios": "^0.21.0",
+    "axios": "^1.2.6",
     "pkcs7-padding": ">=0.1.1"
   }
 }
